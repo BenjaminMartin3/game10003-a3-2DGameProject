@@ -5,10 +5,14 @@ namespace Game10003
 {
     public class Boarder
     {
+        Color boarderGreen = new Color(15, 65, 25); 
         public void DrawOuterBoarder()
         {
             Draw.LineSize = 1;
-            Draw.FillColor = Color.Black;
+            Draw.LineColor = boarderGreen;
+            Draw.FillColor = boarderGreen;
+
+           
 
             // Rectangle Edges
             Draw.Rectangle(0, 0, 50, 600);
@@ -27,7 +31,8 @@ namespace Game10003
         public void DrawInnerBoarder()
         {
             Draw.LineSize = 1;
-            Draw.FillColor = Color.Black;
+            Draw.LineColor = boarderGreen;
+            Draw.FillColor = boarderGreen;
 
             // Left Inner Boarder 
             Draw.Rectangle(150, 220, 150, 20); 
