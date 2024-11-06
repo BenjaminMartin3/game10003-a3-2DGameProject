@@ -33,15 +33,15 @@ namespace Game10003
             }
 
             // Constrain Left
-            if (position.X < 100)
+            if (position.X < 50)
             {
-                position.X = 100;
+                position.X = 50;
             }
 
             // Constrain Right 
-            if (position.X + size.X > 700)
+            if (position.X + size.X > 750)
             {
-                position.X = 700 - size.X; 
+                position.X = 750 - size.X; 
             }
         }
     }

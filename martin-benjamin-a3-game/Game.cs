@@ -13,6 +13,8 @@ namespace Game10003
         // Place your variables here:
         Paddle paddle = new Paddle(); 
         Boarder boarder = new Boarder();
+        Ball ball = new Ball(); 
+        Bricks bricks = new Bricks();
 
         Color backgroundGreen = new Color(155, 188, 15);
         Color ballGreen = new Color(139, 172, 25);
@@ -35,8 +37,6 @@ namespace Game10003
             paddle.size = new Vector2(80, 20);
             paddle.speed = 400; 
             paddle.color = boarderGreen; 
-
-            
         }
 
         /// <summary>
@@ -47,8 +47,17 @@ namespace Game10003
             Window.ClearBackground(backgroundGreen);
             paddle.DrawPaddle();
             paddle.MovePaddle();
-            boarder.DrawOuterBoarder(); 
-            boarder.DrawInnerBoarder(); 
+            
+            boarder.DrawBoarder();
+            
+            ball.UpdatePosition();
+            ball.ConstrainWithinBoarder();
+            ball.isCollidingWithPaddle(paddle); 
+            ball.Render();
+
+            bricks.DrawBricks(); 
+
+             
         }
     }
 }
