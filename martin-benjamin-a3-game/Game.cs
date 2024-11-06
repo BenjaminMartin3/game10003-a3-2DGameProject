@@ -36,7 +36,9 @@ namespace Game10003
             paddle.position.Y = Window.Height - 50;
             paddle.size = new Vector2(80, 20);
             paddle.speed = 400; 
-            paddle.color = boarderGreen; 
+            paddle.color = boarderGreen;
+
+            bricks.size = new Vector2(50, 20);
         }
 
         /// <summary>
