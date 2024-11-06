@@ -47,7 +47,9 @@ namespace Game10003
             Window.ClearBackground(backgroundGreen);
             paddle.DrawPaddle();
             paddle.MovePaddle();
-            
+
+            bricks.DrawBricks();
+
             boarder.DrawBoarder();
             
             ball.UpdatePosition();
@@ -55,7 +57,7 @@ namespace Game10003
             ball.isCollidingWithPaddle(paddle); 
             ball.Render();
 
-            bricks.DrawBricks(); 
+            
 
              
         }

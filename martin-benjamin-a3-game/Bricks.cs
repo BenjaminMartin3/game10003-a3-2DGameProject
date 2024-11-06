@@ -29,6 +29,36 @@ namespace Game10003
             }
 
             // Middle 2 Rows of Bricks 
+            for (int i = 0; i < 4; i++)
+            {
+                int xOffset = i * 50;
+
+                // Left Rows
+                Draw.Rectangle(xOffset, 160, brickWidth, brickHeight); 
+                Draw.Rectangle(xOffset, 180, brickWidth, brickHeight); 
+
+                // Middle Rows 
+                Draw.Rectangle(xOffset + 300, 160, brickWidth, brickHeight); 
+                Draw.Rectangle(xOffset + 300, 180, brickWidth, brickHeight);  
+                
+                // Right Rows 
+                Draw.Rectangle(xOffset + 600, 160, brickWidth, brickHeight); 
+                Draw.Rectangle(xOffset + 600, 180, brickWidth, brickHeight); 
+            }
+
+            // Bottom 5 Rows of Bricks 
+            for (int i = 0; i < 14; i++)
+            {
+                int xOffset = i * 50;
+
+                Draw.Rectangle(xOffset + 50, 220, brickWidth, brickHeight); 
+
+                Draw.Rectangle(xOffset + 50, 280, brickWidth, brickHeight); 
+                Draw.Rectangle(xOffset + 50, 300, brickWidth, brickHeight); 
+
+                Draw.Rectangle(xOffset + 50, 350, brickWidth, brickHeight); 
+                Draw.Rectangle(xOffset + 50, 370, brickWidth, brickHeight); 
+            }
         }
     }
 }

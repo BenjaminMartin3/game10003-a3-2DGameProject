@@ -5,24 +5,27 @@ namespace Game10003
 {
     public class Ball
     {
-        Vector2 positon;
-        Vector2 velocity;
-        float raidus;
+        public Vector2 position;
+        public Vector2 velocity;
+        public Vector2 size;
         Color ballGreen = new Color(48, 98, 48);
+
+        
 
         // Ball Constructor 
         public Ball()
         {
             // Ball Setup
             velocity = Vector2.One * 150;
-            raidus = 10;
-            positon = new Vector2(450, 500);
+            size = Vector2.One * 20; 
+            position = new Vector2(450, 500);
         }
+
 
         public void UpdatePosition()
         {
             // Moving the Ball 
-            positon -= velocity * Time.DeltaTime;
+            position -= velocity * Time.DeltaTime;
         }
 
         public void Render()
@@ -31,43 +34,60 @@ namespace Game10003
             Draw.LineSize = 1;
             Draw.LineColor = ballGreen;
             Draw.FillColor = ballGreen;
-            Draw.Circle(positon, raidus);
+            Draw.Rectangle(position, size);
         }
 
-        public bool ConstrainWithinBoarder()
+        public void ConstrainWithinBoarder()
         {
-            bool isTouchingTop = positon.Y <= 0 + raidus + 50;
-            bool isTouchingLeft = positon.X <= 0 + raidus + 50;
-            bool isTouchingRight = positon.X >= Window.Width - raidus - 50;
+
+            float ballLeft = position.X;
+            float ballRight = position.X + size.X;
+            float ballTop = position.Y;
+            float ballBottom = position.Y + size.Y;
+
+            bool isTouchingTop = ballTop <= 0 + 50;
+            bool isTouchingLeft = ballLeft <= 0 + 50;
+            bool isTouchingRight = ballRight >= Window.Width - 50;
 
             if (isTouchingTop)
             {
                 velocity.Y = -velocity.Y;
-                return true;
             }
 
             if (isTouchingLeft || isTouchingRight)
             {
                 velocity.X = -velocity.X;
-                return true;
             }
-
-            return false;
         }
 
-        public bool isCollidingWithPaddle(Paddle paddle)
+        public void isCollidingWithPaddle(Paddle paddle)
         {
+            float ballLeft = position.X;
+            float ballRight = position.X + size.X;
+            float ballTop = position.Y;
+            float ballBottom = position.Y + size.Y;
 
+            float paddleLeft = paddle.position.X;
+            float paddleRight = paddle.position.X + paddle.size.X;
             float paddleTop = paddle.position.Y;
+            float paddleBottom = paddle.position.Y + paddle.size.Y;
 
+            bool isBallLeftOfPaddle = ballRight > paddleLeft; 
+            bool isBallRightOfPaddle = ballLeft < paddleRight; 
+            bool isBallTopOfPaddle = ballBottom > paddleTop; 
+            bool isBallBottomOfPaddle = ballTop < paddleBottom;
 
-            if (paddleTop < positon.Y + 5)
+            bool isBallHittingPaddle = 
+                isBallLeftOfPaddle &&
+                isBallRightOfPaddle &&
+                isBallTopOfPaddle &&   
+                isBallBottomOfPaddle;
+
+            if (isBallHittingPaddle)
             {
-                velocity.Y = -velocity.Y;
-                return true;    
+                velocity.Y = -velocity.Y; 
             }
-
-            return false;
+                
         }
     }
 }
