@@ -60,7 +60,7 @@ namespace Game10003
             }
         }
 
-        public void isCollidingWithPaddle(Paddle paddle)
+        public void IsCollidingWithPaddle(Paddle paddle)
         {
             float ballLeft = position.X;
             float ballRight = position.X + size.X;
@@ -89,5 +89,7 @@ namespace Game10003
             }
                 
         }
+
+
     }
 }
