@@ -12,9 +12,6 @@ namespace Game10003
         Bricks brick = new Bricks();
         Color ballGreen = new Color(48, 98, 48);
 
-
-
-
         // Ball Constructor 
         public Ball()
         {
@@ -24,7 +21,6 @@ namespace Game10003
             size = Vector2.One * 20;
             position = new Vector2(450, 500);
         }
-
 
         public void UpdatePosition()
         {
@@ -128,10 +124,7 @@ namespace Game10003
 
                 }
             }
-
             return false;
         }
-
-
     }
 }

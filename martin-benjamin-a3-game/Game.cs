@@ -112,6 +112,14 @@ namespace Game10003
             ball.UpdatePosition();
             ball.ConstrainWithinBoarder();
             ball.IsCollidingWithPaddle(paddle);
+
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.R))
+            {
+                // Reset Ball to Original Position 
+                ball.position = new Vector2(450, 500);
+                ball.velocity.Y = -ball.velocity.Y;
+                playerScore = 0;
+            }
         }
 
         void RenderGameOver()
@@ -122,6 +130,7 @@ namespace Game10003
             if(Input.IsKeyboardKeyPressed(KeyboardInput.Space))
             {
                 RenderGame();
+                // Reset Ball to Original Position 
                 ball.position = new Vector2(450, 500);
                 ball.velocity.Y = -ball.velocity.Y;
                 playerScore = 0;    
