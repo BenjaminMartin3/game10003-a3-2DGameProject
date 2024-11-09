@@ -16,14 +16,12 @@ namespace Game10003
         Ball ball = new Ball();
         Bricks[] bricks = new Bricks[14]; 
 
-        
-   
-
         Color backgroundGreen = new Color(155, 188, 15);
         Color ballGreen = new Color(139, 172, 25);
         Color brickGreen = new Color(48, 98, 48);
         Color boarderGreen = new Color(15, 65, 25);
 
+        int playerScore = 0; 
 
 
         /// <summary>
@@ -73,6 +71,7 @@ namespace Game10003
                 {
                     bricks[i].isBrickVisible = false;
                     bricks[i].isBrickCollisionOn = false;
+                    playerScore += 100; 
                 }
             }
 
@@ -100,6 +99,8 @@ namespace Game10003
             {
                 bricks[i].DrawBricks(); 
             }
+            Draw.FillColor = backgroundGreen; 
+            Text.Draw($"Score: {playerScore}", 75, 10); 
         }
     }
 }
