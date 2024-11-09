@@ -21,7 +21,10 @@ namespace Game10003
         Color brickGreen = new Color(48, 98, 48);
         Color boarderGreen = new Color(15, 65, 25);
 
-        int playerScore = 0; 
+        int playerScore = 0;
+
+        int numberOfBricks = 14;
+        int maxAmountOfBricks = 14; 
 
 
         /// <summary>
@@ -43,14 +46,13 @@ namespace Game10003
             // Drawing Line of Bricks 
             for (int i = 0; i < 14; i++)
             {
-                int xOffset = i * 50; 
+                int xOffset = i * 25; 
                 Bricks brick = new Bricks();
                 brick.size = new Vector2(50, 20);
                 brick.position.X = 50 + xOffset;
-                brick.position.Y = 100; 
+                brick.position.Y = Random.Float(50, 400); 
                 bricks[i] = brick;
             }
-            
             
         }
 
@@ -71,7 +73,16 @@ namespace Game10003
                 {
                     bricks[i].isBrickVisible = false;
                     bricks[i].isBrickCollisionOn = false;
-                    playerScore += 100; 
+                    playerScore += 100;
+                    numberOfBricks--; 
+                }
+
+                if (ballCollidesWithBrick && maxAmountOfBricks > numberOfBricks)
+                {
+                    bricks[i].position.X = Random.Float(50, 700);
+                    bricks[i].position.Y = Random.Float(50, 400);
+                    bricks[i].isBrickVisible = true;
+                    bricks[i].isBrickCollisionOn = true;
                 }
             }
 
@@ -95,7 +106,7 @@ namespace Game10003
             ball.Render();
             paddle.DrawPaddle();
             boarder.DrawBoarder();
-            for (int i = 0;i < bricks.Length;i++)
+            for (int i = 0; i < 14; i++)
             {
                 bricks[i].DrawBricks(); 
             }
