@@ -8,16 +8,18 @@ namespace Game10003
         public Vector2 position;
         public Vector2 velocity;
         public Vector2 size;
+        Bricks brick = new Bricks();
         Color ballGreen = new Color(48, 98, 48);
-
         
+
+
 
         // Ball Constructor 
         public Ball()
         {
             // Ball Setup
-            velocity = Vector2.One * 150;
-            size = Vector2.One * 20; 
+            velocity = Vector2.One * 200;
+            size = Vector2.One * 20;
             position = new Vector2(450, 500);
         }
 
@@ -62,6 +64,7 @@ namespace Game10003
 
         public void IsCollidingWithPaddle(Paddle paddle)
         {
+
             float ballLeft = position.X;
             float ballRight = position.X + size.X;
             float ballTop = position.Y;
@@ -72,22 +75,58 @@ namespace Game10003
             float paddleTop = paddle.position.Y;
             float paddleBottom = paddle.position.Y + paddle.size.Y;
 
-            bool isBallLeftOfPaddle = ballRight > paddleLeft; 
-            bool isBallRightOfPaddle = ballLeft < paddleRight; 
-            bool isBallTopOfPaddle = ballBottom > paddleTop; 
+            bool isBallLeftOfPaddle = ballRight > paddleLeft;
+            bool isBallRightOfPaddle = ballLeft < paddleRight;
+            bool isBallTopOfPaddle = ballBottom > paddleTop;
             bool isBallBottomOfPaddle = ballTop < paddleBottom;
 
-            bool isBallHittingPaddle = 
+            bool isBallHittingPaddle =
                 isBallLeftOfPaddle &&
                 isBallRightOfPaddle &&
-                isBallTopOfPaddle &&   
+                isBallTopOfPaddle &&
                 isBallBottomOfPaddle;
 
             if (isBallHittingPaddle)
             {
-                velocity.Y = -velocity.Y; 
+                velocity.Y = -velocity.Y;
             }
-                
+
+        }
+
+        public bool IsCollidingWithBrick(Bricks brick)
+        {
+            float ballLeft = position.X;
+            float ballRight = position.X + size.X;
+            float ballTop = position.Y;
+            float ballBottom = position.Y + size.Y;
+
+            float brickLeft = brick.position.X;
+            float brickRight = brick.position.X + brick.size.X;
+            float brickTop = brick.position.Y;
+            float brickBottom = brick.position.Y + brick.size.Y;
+
+            bool isBallLeftOfBrick = ballRight > brickLeft;
+            bool isBallRightOfBrick = ballLeft < brickRight;
+            bool isBallTopOfBrick = ballBottom > brickTop;
+            bool isBallBottomOfBrick = ballTop < brickBottom;
+
+            bool isBallHittingBrick =
+                isBallLeftOfBrick &&
+                isBallRightOfBrick &&
+                isBallTopOfBrick &&
+                isBallBottomOfBrick;
+
+            if (brick.isBrickCollisionOn)
+            {
+                if (isBallHittingBrick)
+                {
+                    velocity.Y = -velocity.Y;
+                    return isBallHittingBrick;
+
+                }
+            }
+
+            return false;
         }
 
 

@@ -14,7 +14,10 @@ namespace Game10003
         Paddle paddle = new Paddle();
         Boarder boarder = new Boarder();
         Ball ball = new Ball();
-        Bricks bricks = new Bricks();
+        Bricks[] bricks = new Bricks[14]; 
+
+        
+   
 
         Color backgroundGreen = new Color(155, 188, 15);
         Color ballGreen = new Color(139, 172, 25);
@@ -38,8 +41,19 @@ namespace Game10003
             paddle.speed = 400;
             paddle.color = boarderGreen;
 
-            bricks.size = new Vector2(50, 20);
-            bricks.position = new Vector2(200, 180);
+
+            // Drawing Line of Bricks 
+            for (int i = 0; i < 14; i++)
+            {
+                int xOffset = i * 50; 
+                Bricks brick = new Bricks();
+                brick.size = new Vector2(50, 20);
+                brick.position.X = 50 + xOffset;
+                brick.position.Y = 100; 
+                bricks[i] = brick;
+            }
+            
+            
         }
 
         /// <summary>
@@ -47,30 +61,45 @@ namespace Game10003
         /// </summary>
         public void Update()
         {
-            Window.ClearBackground(backgroundGreen);
-            paddle.DrawPaddle();
+            RenderGame();
             paddle.MovePaddle();
 
-
-            bricks.HasCollidedWithBrick(ball);
+            // Ball collsion with Brick 
             
-                
-            if (bricks.isBrickVisible == true)
+            for (int i = 0; i < 14; i++)
             {
-                bricks.DrawBricks();
+                bool ballCollidesWithBrick = ball.IsCollidingWithBrick(bricks[i]);
+                if (ballCollidesWithBrick)
+                {
+                    bricks[i].isBrickVisible = false;
+                    bricks[i].isBrickCollisionOn = false;
+                }
             }
 
-            boarder.DrawBoarder();
+
+            
+            
 
             ball.UpdatePosition();
             ball.ConstrainWithinBoarder();
             ball.IsCollidingWithPaddle(paddle);
+            
 
+
+            Window.ClearBackground(backgroundGreen);
+
+        }
+
+
+        void RenderGame()
+        {
             ball.Render();
-
-
-
-
+            paddle.DrawPaddle();
+            boarder.DrawBoarder();
+            for (int i = 0;i < bricks.Length;i++)
+            {
+                bricks[i].DrawBricks(); 
+            }
         }
     }
 }
