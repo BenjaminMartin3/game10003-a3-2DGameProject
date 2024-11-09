@@ -13,6 +13,7 @@ namespace Game10003
 
         public void DrawPaddle()
         {
+            // Draw Paddle
             Draw.LineSize = 1;
             Draw.FillColor = color;
             Draw.Rectangle(position, size);

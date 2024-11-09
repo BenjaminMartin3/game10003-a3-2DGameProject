@@ -16,6 +16,7 @@ namespace Game10003
         {
             if (isBrickVisible)
             {
+                // Draw Brick 
                 Draw.LineSize = 1;
                 Draw.LineColor = backgroundGreen;
                 Draw.FillColor = brickGreen;

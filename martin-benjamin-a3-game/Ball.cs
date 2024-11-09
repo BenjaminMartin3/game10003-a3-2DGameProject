@@ -39,7 +39,7 @@ namespace Game10003
 
         public void ConstrainWithinBoarder()
         {
-
+            // Boarder Collision 
             float ballLeft = position.X;
             float ballRight = position.X + size.X;
             float ballTop = position.Y;
@@ -62,7 +62,7 @@ namespace Game10003
 
         public void IsCollidingWithPaddle(Paddle paddle)
         {
-
+            // Paddle Collision
             float ballLeft = position.X;
             float ballRight = position.X + size.X;
             float ballTop = position.Y;
@@ -94,6 +94,7 @@ namespace Game10003
 
         public bool IsCollidingWithBrick(Bricks brick)
         {
+            // Brick Collision 
             float ballLeft = position.X;
             float ballRight = position.X + size.X;
             float ballTop = position.Y;

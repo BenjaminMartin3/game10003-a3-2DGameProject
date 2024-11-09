@@ -12,7 +12,7 @@ namespace Game10003
             Draw.LineColor = boarderGreen;
             Draw.FillColor = boarderGreen;
 
-            // Rectangle Edges
+            // Draw Boarder
             Draw.Rectangle(0, 0, 50, 600);
             Draw.Rectangle(0, 0, 800, 50);
             Draw.Rectangle(750, 0, 50, 600);

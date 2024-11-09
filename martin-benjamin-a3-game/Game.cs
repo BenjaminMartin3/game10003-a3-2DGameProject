@@ -21,7 +21,9 @@ namespace Game10003
         Color brickGreen = new Color(48, 98, 48);
         Color boarderGreen = new Color(15, 65, 25);
 
+        // Set player's score and high score
         int playerScore = 0;
+        int highScore = 0; 
 
         int numberOfBricks = 14;
         int maxAmountOfBricks = 14;
@@ -32,7 +34,7 @@ namespace Game10003
         /// </summary>
         public void Setup()
         {
-            Window.SetTitle("Breakout Clone");
+            Window.SetTitle("Brick Breaker");
             Window.SetSize(800, 600);
 
             // Paddle Settings 
@@ -49,7 +51,7 @@ namespace Game10003
                 Bricks brick = new Bricks();
                 brick.size = new Vector2(50, 20);
                 brick.position.X = 50 + xOffset;
-                brick.position.Y = Random.Float(50, 400);
+                brick.position.Y = Random.Float(50, 300);
                 bricks[i] = brick;
             }
 
@@ -60,6 +62,7 @@ namespace Game10003
         /// </summary>
         public void Update()
         {
+            // Renders Game Over screen when ball leave window
             if (ball.position.Y > Window.Height)
             {
                 RenderGameOver();
@@ -71,7 +74,6 @@ namespace Game10003
             paddle.MovePaddle();
 
             // Ball collsion with Brick 
-
             for (int i = 0; i < 10; i++)
             {
                 bool ballCollidesWithBrick = ball.IsCollidingWithBrick(bricks[i]);
@@ -107,7 +109,9 @@ namespace Game10003
             {
                 bricks[i].DrawBricks();
             }
-            Text.Draw($"Score: {playerScore}", 75, 10);
+            Text.Color = backgroundGreen;
+            Text.Draw($"Score: {playerScore}", Window.Width / 2 - 80, 15);
+            
 
             ball.UpdatePosition();
             ball.ConstrainWithinBoarder();
@@ -124,9 +128,15 @@ namespace Game10003
 
         void RenderGameOver()
         {
+            if (highScore < playerScore)
+            {
+                highScore = playerScore;    
+            };
+            Text.Color = boarderGreen;
             Text.Draw("Game Over!", Window.Width / 2 - 75, Window.Height / 2 - 100);
             Text.Draw("Press Spacebar To Play", Window.Width / 2 - 175, Window.Height / 2); 
             Text.Draw($"Your Score: {playerScore}", Window.Width / 2 - 125, Window.Height / 2 + 100); 
+            Text.Draw($"High Score: {highScore}", Window.Width / 2 - 125, Window.Height / 2 + 150); 
             if(Input.IsKeyboardKeyPressed(KeyboardInput.Space))
             {
                 RenderGame();
