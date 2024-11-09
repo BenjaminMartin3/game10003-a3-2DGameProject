@@ -9,7 +9,7 @@ namespace Game10003
         public Vector2 position;
         public Vector2 size;
         public Color color;
-        public float speed; 
+        public float speed;
 
         public void DrawPaddle()
         {
@@ -23,7 +23,7 @@ namespace Game10003
             // Move Paddle Left
             if (Input.IsKeyboardKeyDown(KeyboardInput.Left))
             {
-                position.X -= speed * Time.DeltaTime; 
+                position.X -= speed * Time.DeltaTime;
             }
 
             // Move Paddle Right 
@@ -41,7 +41,7 @@ namespace Game10003
             // Constrain Right 
             if (position.X + size.X > 750)
             {
-                position.X = 750 - size.X; 
+                position.X = 750 - size.X;
             }
         }
     }

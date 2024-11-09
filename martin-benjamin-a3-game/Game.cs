@@ -14,7 +14,7 @@ namespace Game10003
         Paddle paddle = new Paddle();
         Boarder boarder = new Boarder();
         Ball ball = new Ball();
-        Bricks[] bricks = new Bricks[14]; 
+        Bricks[] bricks = new Bricks[14];
 
         Color backgroundGreen = new Color(155, 188, 15);
         Color ballGreen = new Color(139, 172, 25);
@@ -24,7 +24,7 @@ namespace Game10003
         int playerScore = 0;
 
         int numberOfBricks = 14;
-        int maxAmountOfBricks = 14; 
+        int maxAmountOfBricks = 14;
 
 
         /// <summary>
@@ -39,21 +39,20 @@ namespace Game10003
             paddle.position.X = Window.Width / 2;
             paddle.position.Y = Window.Height - 50;
             paddle.size = new Vector2(80, 20);
-            paddle.speed = 400;
+            paddle.speed = 500;
             paddle.color = boarderGreen;
 
-
-            // Drawing Line of Bricks 
-            for (int i = 0; i < 14; i++)
+            // Setup Random Brick Placements 
+            for (int i = 0; i < 10; i++)
             {
-                int xOffset = i * 25; 
+                int xOffset = i * 25;
                 Bricks brick = new Bricks();
                 brick.size = new Vector2(50, 20);
                 brick.position.X = 50 + xOffset;
-                brick.position.Y = Random.Float(50, 400); 
+                brick.position.Y = Random.Float(50, 400);
                 bricks[i] = brick;
             }
-            
+
         }
 
         /// <summary>
@@ -61,22 +60,32 @@ namespace Game10003
         /// </summary>
         public void Update()
         {
-            RenderGame();
+            if (ball.position.Y > Window.Height)
+            {
+                RenderGameOver();
+            }
+            else
+            {
+                RenderGame(); 
+            }
             paddle.MovePaddle();
 
             // Ball collsion with Brick 
-            
-            for (int i = 0; i < 14; i++)
+
+            for (int i = 0; i < 10; i++)
             {
                 bool ballCollidesWithBrick = ball.IsCollidingWithBrick(bricks[i]);
+
+                // Brick Disappears When Hit
                 if (ballCollidesWithBrick)
                 {
                     bricks[i].isBrickVisible = false;
                     bricks[i].isBrickCollisionOn = false;
                     playerScore += 100;
-                    numberOfBricks--; 
+                    numberOfBricks--;
                 }
 
+                // Brick Reappears Somewhere Else
                 if (ballCollidesWithBrick && maxAmountOfBricks > numberOfBricks)
                 {
                     bricks[i].position.X = Random.Float(50, 700);
@@ -86,32 +95,37 @@ namespace Game10003
                 }
             }
 
-
-            
-            
-
-            ball.UpdatePosition();
-            ball.ConstrainWithinBoarder();
-            ball.IsCollidingWithPaddle(paddle);
-            
-
-
             Window.ClearBackground(backgroundGreen);
-
         }
-
 
         void RenderGame()
         {
             ball.Render();
             paddle.DrawPaddle();
             boarder.DrawBoarder();
-            for (int i = 0; i < 14; i++)
+            for (int i = 0; i < 10; i++)
             {
-                bricks[i].DrawBricks(); 
+                bricks[i].DrawBricks();
             }
-            Draw.FillColor = backgroundGreen; 
-            Text.Draw($"Score: {playerScore}", 75, 10); 
+            Text.Draw($"Score: {playerScore}", 75, 10);
+
+            ball.UpdatePosition();
+            ball.ConstrainWithinBoarder();
+            ball.IsCollidingWithPaddle(paddle);
+        }
+
+        void RenderGameOver()
+        {
+            Text.Draw("Game Over!", Window.Width / 2 - 75, Window.Height / 2 - 100);
+            Text.Draw("Press Spacebar To Play", Window.Width / 2 - 175, Window.Height / 2); 
+            Text.Draw($"Your Score: {playerScore}", Window.Width / 2 - 125, Window.Height / 2 + 100); 
+            if(Input.IsKeyboardKeyPressed(KeyboardInput.Space))
+            {
+                RenderGame();
+                ball.position = new Vector2(450, 500);
+                ball.velocity.Y = -ball.velocity.Y;
+                playerScore = 0;    
+            }
         }
     }
 }

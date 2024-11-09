@@ -8,9 +8,10 @@ namespace Game10003
         public Vector2 position;
         public Vector2 velocity;
         public Vector2 size;
+        public float speed;
         Bricks brick = new Bricks();
         Color ballGreen = new Color(48, 98, 48);
-        
+
 
 
 
@@ -18,7 +19,8 @@ namespace Game10003
         public Ball()
         {
             // Ball Setup
-            velocity = Vector2.One * 200;
+            speed = 300;
+            velocity = Vector2.One * speed;
             size = Vector2.One * 20;
             position = new Vector2(450, 500);
         }
@@ -85,6 +87,7 @@ namespace Game10003
                 isBallRightOfPaddle &&
                 isBallTopOfPaddle &&
                 isBallBottomOfPaddle;
+
 
             if (isBallHittingPaddle)
             {

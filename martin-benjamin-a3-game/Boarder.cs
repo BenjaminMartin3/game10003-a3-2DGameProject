@@ -5,7 +5,7 @@ namespace Game10003
 {
     public class Boarder
     {
-        Color boarderGreen = new Color(15, 65, 25); 
+        Color boarderGreen = new Color(15, 65, 25);
         public void DrawBoarder()
         {
             Draw.LineSize = 1;
@@ -18,6 +18,6 @@ namespace Game10003
             Draw.Rectangle(750, 0, 50, 600);
         }
 
-        
+
     }
 }
